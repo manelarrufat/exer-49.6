@@ -1,0 +1,5 @@
+name = "Users Login Forcontu"
+description = "Allow you to keep a record of all logins and logouts Site"
+core = 7.x
+files[] = users_login_forcontu.module
+package = My modules

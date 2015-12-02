@@ -1,0 +1,6 @@
+<?php
+/**
+* @file
+* Módulo Users Login Forcontu
+* Este módulo nos permitirá guardar un registro de todos los accesos y cierres de sesión del sitio
+*/

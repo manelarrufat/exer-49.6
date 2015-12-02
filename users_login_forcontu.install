@@ -1,0 +1,51 @@
+<?php
+/**
+* @file
+* Módulo Users Login Forcontu
+* Este módulo creará durante la instalación una tabla llamada users_login_forcontu y se borran al desinstalar.
+*/
+
+/**
+ * Implements hook_install().
+ */
+function users_login_forcontu_install() {
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function users_login_forcontu_uninstall() {
+}
+
+/**
+ * Implements hook_schema().
+ */
+function users_login_forcontu_schema() {
+  $schema['users_login_forcontu'] = array(
+    'description' => 'Stores table users_login_forcontu',
+    'fields' => array(
+      'uid' => array(
+        'description' => 'Campo entero autoincremental para identificar el registro',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+      ),
+      'login_date' => array(
+        'description' => 'Campo entero con la fecha en formato UNIX timestamp',
+        'type' => 'int',
+        'unsigned' => TRUE,
+      ),
+      'login_type' => array(
+        'description' => 'Tipo de operación podrá tener los valores: login o logout',
+        'type' => 'varchar',
+        'length' => 10,
+      ),
+      'ip' => array(
+        'description' => 'Almacena la dirección ip desde donde se accede al sitio',
+        'type' => 'varchar',
+        'length' => 40,
+      ),
+    ),
+    'primary key' => array('uid'),
+  );
+  return $schema;
+}
