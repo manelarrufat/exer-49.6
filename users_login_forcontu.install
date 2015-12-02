@@ -45,7 +45,6 @@ function users_login_forcontu_schema() {
         'length' => 40,
       ),
     ),
-    'primary key' => array('uid'),
   );
   return $schema;
 }

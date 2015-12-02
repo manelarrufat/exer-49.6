@@ -10,12 +10,27 @@
  */
 function users_login_forcontu_user_login(&$edit, $account) {
   // Cuando un usuario se loguea se añade un registro a la tabla users_login_forcontu.
-  global $user;
-  $record = array (
-    "uid" => $user->uid, //identificador del usuario
-    "login_date" => time(), //fecha timestamp
-    "login_type" => 'login', //tipo de acceso login
-    "ip" => ip_address(), //dirección ip desde donde accede el usuario
-  );
-  drupal_write_record('users_login_forcontu', $record); //insertamos registro en la tabla
+  db_insert('users_login_forcontu')
+    ->fields(array(
+      'uid' => $account->uid,//identificador del usuario
+      'login_date' => time(),//fecha timestamp
+      'login_type' => 'login',//tipo de acceso login
+      'ip' => ip_address(),//dirección ip desde donde accede el usuario
+    ))
+    ->execute();
+}
+
+/**
+ * Implements hook_user_logout().
+ */
+function users_login_forcontu_user_logout($account) {
+  // Cuando un usuario se desloguea se añade un registro a la tabla users_login_forcontu.
+  db_insert('users_login_forcontu')
+    ->fields(array(
+      'uid' => $account->uid,//identificador del usuario
+      'login_date' => time(),//fecha timestamp
+      'login_type' => 'logout',//tipo de acceso login
+      'ip' => ip_address(),//dirección ip desde donde accede el usuario
+    ))
+    ->execute();
 }
