@@ -4,3 +4,18 @@
 * Módulo Users Login Forcontu
 * Este módulo nos permitirá guardar un registro de todos los accesos y cierres de sesión del sitio
 */
+
+/**
+ * Implements hook_user_login().
+ */
+function users_login_forcontu_user_login(&$edit, $account) {
+  // Cuando un usuario se loguea se añade un registro a la tabla users_login_forcontu.
+  global $user;
+  $record = array (
+    "uid" => $user->uid, //identificador del usuario
+    "login_date" => time(), //fecha timestamp
+    "login_type" => 'login', //tipo de acceso login
+    "ip" => ip_address(), //dirección ip desde donde accede el usuario
+  );
+  drupal_write_record('users_login_forcontu', $record); //insertamos registro en la tabla
+}

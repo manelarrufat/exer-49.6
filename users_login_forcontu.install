@@ -25,8 +25,8 @@ function users_login_forcontu_schema() {
     'description' => 'Stores table users_login_forcontu',
     'fields' => array(
       'uid' => array(
-        'description' => 'Campo entero autoincremental para identificar el registro',
-        'type' => 'serial',
+        'description' => 'Campo entero con el identificador del usuario',
+        'type' => 'int',
         'unsigned' => TRUE,
       ),
       'login_date' => array(
