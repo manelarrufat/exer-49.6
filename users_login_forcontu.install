@@ -24,6 +24,11 @@ function users_login_forcontu_schema() {
   $schema['users_login_forcontu'] = array(
     'description' => 'Stores table users_login_forcontu',
     'fields' => array(
+      'id' => array(
+        'description' => 'Campo entero autoincremental identificador de la entrada',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+      ),
       'uid' => array(
         'description' => 'Campo entero con el identificador del usuario',
         'type' => 'int',
@@ -45,6 +50,7 @@ function users_login_forcontu_schema() {
         'length' => 40,
       ),
     ),
+    'primary key' => array('id'),
   );
   return $schema;
 }

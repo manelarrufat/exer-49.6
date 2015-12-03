@@ -34,3 +34,21 @@ function users_login_forcontu_user_logout($account) {
     ))
     ->execute();
 }
+
+/**
+ * Implements hook_user_load().
+ */
+function users_login_forcontu_user_load($users) {
+  //Calculamos login de usuarios
+  $result_in = db_query("SELECT uid , COUNT(uid) AS login_count FROM {users_login_forcontu} WHERE  login_type='login' GROUP BY uid", array(':uids' => array_keys($users)));
+  foreach ($result_in as $record) {
+    $users[$record->uid]->login_count = $record->login_count;
+  }
+  //Calculamos logout de usuarios
+  $result_out = db_query("SELECT uid , COUNT(uid) AS logout_count FROM {users_login_forcontu} WHERE  login_type='logout' GROUP BY uid", array(':uids' => array_keys($users)));
+  foreach ($result_out as $record) {
+    $users[$record->uid]->logout_count = $record->logout_count;
+  }
+
+  //dpm($users);
+}
