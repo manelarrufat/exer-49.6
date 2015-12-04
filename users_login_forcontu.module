@@ -52,3 +52,41 @@ function users_login_forcontu_user_load($users) {
 
   //dpm($users);
 }
+
+/**
+ * Implements hook_user_categories().
+ */
+function users_login_forcontu_user_categories() {
+  return array(array(
+    'name' => 'login_count',
+    'title' => t('Login counter'),
+    'access callback' => 'user_access',
+    'weight' => 5,
+  ));
+}
+
+/**
+ * Implements hook_user_view().
+ */
+function users_login_forcontu_user_view($account, $view_mode, $langcode) {
+  //dpm($account);
+  $account->content['login_count'] = array();
+  $account->content['login_count'] = array(
+    '#type' => 'user_profile_category',
+    '#attributes' => array('class' => 'contador-accesos-usuario'),
+    '#weight' => 5,
+    '#title' => t('Login count'),
+  );
+  $account->content['login_count']['login'] = array(
+    '#type' => 'user_profile_item',
+    '#markup' => 'Logins: ' . $account->login_count,
+    '#attributes' => array('class' => 'login-count'),
+    '#weight' => 1,
+  );
+  $account->content['login_count']['logout'] = array(
+    '#type' => 'user_profile_item',
+    '#markup' => 'Logouts: ' . $account->logout_count,
+    '#attributes' => array('class' => 'login-count'),
+    '#weight' => 2,
+  );
+}
